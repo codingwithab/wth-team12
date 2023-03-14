@@ -33,4 +33,4 @@ jobs:
       run: |
          ls -al ./Application/tests/RazorPagesTestSample.Tests
          pwd
-         dotnet test /home/runner/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
+         dotnet test /home/runner/work/wth-team12/wth-team12/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
