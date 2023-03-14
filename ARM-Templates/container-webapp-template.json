@@ -11,7 +11,7 @@
       "type": "String"
     },
     "appInsightsLocation": {
-      "defaultValue": "South Central US",
+      "defaultValue": "West Europe",
       "type": "String"
     },
     "appInsightsName": {
