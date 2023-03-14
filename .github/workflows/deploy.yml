@@ -40,7 +40,7 @@ jobs:
       - name: LoginAzure
         uses: azure/login@v1
         with:
-          creds: $AZURE_SECRET
+          creds: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
           enable-AzPSSession:
             true
 
