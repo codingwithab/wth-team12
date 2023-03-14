@@ -20,10 +20,7 @@ env:
   AZURE_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
   ResourceGroupName: ${{ vars.AZURE_GROUP }}
   ResourceGroupLocation: "UK South"
-  StorageAccountName: 
-
-
-
+  StorageAccountName:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -51,7 +48,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: Azure/CLI@v1
         with:
-          inlineScript: |            
+          inlineScript: |
             #!/bin/bash
             if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
               echo "Azure resource group already exists, skipping creation..."
@@ -62,8 +59,7 @@ jobs:
       - uses: azure/arm-deploy@v1
         with:
           resourceGroupName: ${{ env.ResourceGroupName }}
-          template: './ARM-Templates/container-webapp-template.json'
+          template: "./ARM-Templates/container-webapp-template.json"
           # parameters: storageAccountName=${{ env.StorageAccountName }}
-
   # - run: |
   # Get-AzVM -ResourceGroupName "ResourceGroup11"
