@@ -20,7 +20,8 @@ env:
   AZURE_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
   ResourceGroupName: ${{ vars.AZURE_GROUP }}
   ResourceGroupLocation: "UK South"
-  StorageAccountName:
+  webAppNameEnv: "taterdevops-dev"
+  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -60,6 +61,6 @@ jobs:
         with:
           resourceGroupName: ${{ env.ResourceGroupName }}
           template: "./ARM-Templates/container-webapp-template.json"
-          # parameters: storageAccountName=${{ env.StorageAccountName }}
+          parameters: webAppName=${{ env.webAppNameEnv }}
   # - run: |
   # Get-AzVM -ResourceGroupName "ResourceGroup11"
