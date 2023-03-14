@@ -6,8 +6,8 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-    paths: 
-      - 'Application/**'
+#     paths: 
+#       - 'Application/**'
   pull_request:
     branches: [ "main" ]
     paths: 
@@ -31,6 +31,6 @@ jobs:
       run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
       run: |
-         ls -al /home/runner/Application/tests
+         ls -al ./Application/tests
          pwd
          dotnet test /home/runner/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
