@@ -37,16 +37,12 @@ jobs:
           echo $AZURE_SECRET is 
           echo $AZURE_VARIABLE is
 
-      - name: Login to AZURE
-
-        jobs:
-          build-and-deploy:
-            runs-on: ubuntu-latest
-            steps:
-              - uses: azure/login@v1
-                with:
-                  creds: $AZURE_SECRET
-                  enable-AzPSSession: true
+      - name: LoginAzure
+      - uses: azure/login@v1
+        with:
+          creds: $AZURE_SECRET
+          enable-AzPSSession:
+            true
 
             # - run: |
             # Get-AzVM -ResourceGroupName "ResourceGroup11"
