@@ -49,20 +49,20 @@ jobs:
       - name: Show Azure Account
         run: az account show
       - uses: actions/checkout@v2
-      # - uses: Azure/CLI@v1
-      #   with:
-      #     inlineScript: |            
-      #     #!/bin/bash
-      #       if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
-      #         echo "Azure resource group already exists, skipping creation..."
-      #       else
-      #         az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
-      #           echo "Azure resource group created"
-      #       fi
-      # - uses: azure/arm-deploy@v1
-      #   with:
-      #     resourceGroupName: ${{ env.ResourceGroupName }}
-      #     template: './ARM-Templates/container-webapp-template.json'          
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |            
+          #!/bin/bash
+            if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
+              echo "Azure resource group already exists, skipping creation..."
+            else
+              az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
+                echo "Azure resource group created"
+            fi
+      - uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ env.ResourceGroupName }}
+          template: './ARM-Templates/container-webapp-template.json'
           # parameters: storageAccountName=${{ env.StorageAccountName }}
 
   # - run: |
