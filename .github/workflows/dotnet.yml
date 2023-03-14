@@ -30,4 +30,8 @@ jobs:
     - name: Build
       run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
-      run: dotnet test ~/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
+      run: |
+         cat /home/runner/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+         ls -al /home/runner/Application/tests
+         pwd
+         dotnet test /home/runner/Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj --no-build --verbosity normal
