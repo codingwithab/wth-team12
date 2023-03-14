@@ -59,10 +59,10 @@ jobs:
       #         az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
       #           echo "Azure resource group created"
       #       fi
-      - uses: azure/arm-deploy@v1
-        with:
-          resourceGroupName: ${{ env.ResourceGroupName }}
-          template: './ARM-Templates/container-webapp-template.json'          
+      # - uses: azure/arm-deploy@v1
+      #   with:
+      #     resourceGroupName: ${{ env.ResourceGroupName }}
+      #     template: './ARM-Templates/container-webapp-template.json'          
           # parameters: storageAccountName=${{ env.StorageAccountName }}
 
   # - run: |
