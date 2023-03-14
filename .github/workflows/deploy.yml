@@ -21,7 +21,7 @@ env:
   ResourceGroupName: ${{ vars.AZURE_GROUP }}
   ResourceGroupLocation: "UK South"
   webAppNameEnv: "taterdevops-dev"
-  targetEnv: "taterdevops-test"
+  targetEnv: "taterdevops-prod"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
