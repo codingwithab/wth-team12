@@ -38,7 +38,7 @@ jobs:
           echo $AZURE_VARIABLE is
 
       - name: LoginAzure
-      - uses: azure/login@v1
+        uses: azure/login@v1
         with:
           creds: $AZURE_SECRET
           enable-AzPSSession:
