@@ -18,7 +18,12 @@ on:
 
 env:
   AZURE_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
-  AZURE_VARIABLE: ${{ vars.AZURE_GROUP }}
+  ResourceGroupName: ${{ vars.AZURE_GROUP }}
+  ResourceGroupLocation: "UK South"
+  StorageAccountName: 
+
+
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -34,15 +39,32 @@ jobs:
         run: |
           echo "Hello ${{ github.event.inputs.name }}"
           echo "Job1 done"
-          echo $AZURE_SECRET is 
-          echo $AZURE_VARIABLE is
 
       - name: LoginAzure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
-          enable-AzPSSession:
-            true
+          enable-AzPSSession: true
 
-            # - run: |
-            # Get-AzVM -ResourceGroupName "ResourceGroup11"
+      - name: Show Azure Account
+        run:
+  az account show
+      - uses: actions/checkout@v2
+      - uses: Azure/CLI@v1
+        with:          
+          inlineScript: |            
+          #!/bin/bash
+            if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
+              echo "Azure resource group already exists, skipping creation..."
+            else
+              az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
+              echo "Azure resource group created"
+            fi      
+      - uses: azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ env.ResourceGroupName }}
+          template: './ARM-Templates/container-webapp-template.json'          
+          # parameters: storageAccountName=${{ env.StorageAccountName }}
+
+  # - run: |
+  # Get-AzVM -ResourceGroupName "ResourceGroup11"
