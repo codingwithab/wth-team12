@@ -21,7 +21,6 @@ env:
   ResourceGroupName: ${{ vars.AZURE_GROUP }}
   ResourceGroupLocation: "UK South"
   webAppNameEnv: "taterdevops-dev"
-  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,21 +41,21 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.SERVICE_PRINCIPAL_CREDENTIALS }}
-          enable-AzPSSession: true
+          # enable-AzPSSession: true
 
       - name: Show Azure Account
         run: az account show
       - uses: actions/checkout@v2
-      - uses: Azure/CLI@v1
-        with:
-          inlineScript: |
-            #!/bin/bash
-            if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
-              echo "Azure resource group already exists, skipping creation..."
-            else
-              az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
-                echo "Azure resource group created"
-            fi
+      # - uses: Azure/CLI@v1
+        # with:
+        #   inlineScript: |
+        #     #!/bin/bash
+        #     if $(az group exists --name ${{ env.ResourceGroupName }}) ; then
+        #       echo "Azure resource group already exists, skipping creation..."
+        #     else
+        #       az group create --name ${{ env.ResourceGroupName }} --location ${{ env.ResourceGroupLocation }}
+        #         echo "Azure resource group created"
+        #     fi
       - uses: azure/arm-deploy@v1
         with:
           resourceGroupName: ${{ env.ResourceGroupName }}
